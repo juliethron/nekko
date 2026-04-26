@@ -126,4 +126,4 @@ function initLogin() {
   initSearch();
   initRegister();
   initLogin();
-  });
+});
