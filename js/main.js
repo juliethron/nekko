@@ -88,7 +88,6 @@ renderPosts(filtered);
     console.error(err);
   }
 });
-}
 
 
   document.addEventListener("DOMContentLoaded", () => {
