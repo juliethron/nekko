@@ -65,6 +65,37 @@ renderPosts(filtered);
 }
 
 
+function initLogin() {
+  const loginBtn = document.getElementById("login-btn");
+
+  if (!loginBtn) return;
+
+  loginBtn.addEventListener("click", async () => {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+    const message = document.getElementById("login-message");
+
+    console.log("LOGIN INPUT:", { email, password });
+
+    try {
+      const data = await login({ email, password });
+
+      if (!data.data || !data.data.accessToken) {
+        throw new Error("Invalid login");
+      }
+
+      localStorage.setItem("token", data.data.accessToken);
+
+      window.location.href = "./feed.html";
+
+    } catch (err) {
+      message.textContent = "Login failed. Check your email/password.";
+      console.error(err);
+    }
+  });
+}
+
+
  loginBtn.addEventListener("click", async () => {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
