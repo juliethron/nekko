@@ -33,7 +33,7 @@ renderPosts(filtered);
 }
 
 
- function initRegister() {
+function initRegister() {
   const registerBtn = document.getElementById("register-btn");
 
   if (!registerBtn) return;
@@ -54,21 +54,23 @@ renderPosts(filtered);
     const password = passwordInput.value;
 
     try {
-  const result = await register({ name, email, password });
+      const result = await register({ name, email, password });
 
-  console.log("REGISTER RESULT:", result);
+      console.log("REGISTER RESULT:", result);
 
-  if (result.errors) {
-    message.textContent = "Registration failed.";
-    console.error(result.errors);
-    return;
-  }
+      if (result.errors) {
+        message.textContent = "Registration failed.";
+        console.error(result.errors);
+        return;
+      }
 
-  message.textContent = "Registered successfully! You can now log in.";
+      message.textContent = "Registered successfully! You can now log in.";
 
-} catch (err) {
-  message.textContent = "Registration failed.";
-  console.error(err);
+    } catch (err) {
+      message.textContent = "Registration failed.";
+      console.error(err);
+    }
+  });
 }
 
 
