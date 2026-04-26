@@ -15,3 +15,5 @@ export function renderPosts(posts) {
     container.appendChild(div);
   });
 }
+
+<button onclick="deletePost('${post.id}')">Delete</button>
