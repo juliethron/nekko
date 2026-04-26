@@ -5,11 +5,11 @@ export function renderPosts(posts) {
 
   posts.forEach(post => {
     const div = document.createElement("div");
+    div.classList.add("post");
 
     div.innerHTML = `
-      <h3>${post.title}</h3>
-      <p>${post.body}</p>
-      <small>By ${post.author.name}</small>
+      <h3>${post.title || "No title"}</h3>
+      <p>${post.body || ""}</p>
     `;
 
     container.appendChild(div);
