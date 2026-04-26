@@ -136,6 +136,25 @@ window.deletePost = async (id) => {
   location.reload();
 };
 
+window.editPost = async (id) => {
+  const newText = prompt("Edit your post:");
+
+  const token = localStorage.getItem("token");
+
+  await fetch(`https://v2.api.noroff.dev/social/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
+    },
+    body: JSON.stringify({ body: newText })
+  });
+
+  location.reload();
+};
+
+
   document.addEventListener("DOMContentLoaded", () => {
   initFeed();
   initSearch();
