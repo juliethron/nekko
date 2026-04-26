@@ -58,38 +58,32 @@ try {
 }
 
 
-  function initLogin() {
+ function initLogin() {
   const loginBtn = document.getElementById("login-btn");
 
-if (!loginBtn) return;
+  if (!loginBtn) return;
 
-loginBtn.addEventListener("click", async () => {
-const email = document.getElementById("login-email").value;
-const password = document.getElementById("login-password").value;
-const message = document.getElementById("login-message");
+  loginBtn.addEventListener("click", async () => {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+    const message = document.getElementById("login-message");
 
+    try {
+      const data = await login({ email, password });
 
-loginBtn.addEventListener("click", async () => {
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
-  const message = document.getElementById("login-message");
+      if (!data.data || !data.data.accessToken) {
+        throw new Error("Invalid login");
+      }
 
-  try {
-    const data = await login({ email, password });
+      localStorage.setItem("token", data.data.accessToken);
 
-    if (!data.data || !data.data.accessToken) {
-      throw new Error("Invalid login");
+      window.location.href = "./feed.html";
+
+    } catch (err) {
+      message.textContent = "Login failed. Check your email/password.";
+      console.error(err);
     }
-
-    localStorage.setItem("token", data.data.accessToken);
-
-    window.location.href = "./feed.html";
-
-  } catch (err) {
-    message.textContent = "Login failed. Check your email/password.";
-    console.error(err);
-  }
-});
+  });
 }
 
 
