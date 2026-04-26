@@ -104,7 +104,23 @@ function initLogin() {
   });
 }
 
+document.getElementById("create-post-btn")?.addEventListener("click", async () => {
+  const content = document.getElementById("post-content").value;
 
+  const token = localStorage.getItem("token");
+
+  await fetch("https://v2.api.noroff.dev/social/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": "YOUR_API_KEY"
+    },
+    body: JSON.stringify({ body: content })
+  });
+
+  location.reload(); 
+});
 
 
   document.addEventListener("DOMContentLoaded", () => {
