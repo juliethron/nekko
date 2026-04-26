@@ -54,14 +54,21 @@ renderPosts(filtered);
     const password = passwordInput.value;
 
     try {
-      await register({ name, email, password });
+  const result = await register({ name, email, password });
 
-      message.textContent = "Registered successfully! You can now log in.";
-    } catch (err) {
-      message.textContent = "Registration failed.";
-      console.error(err);
-    }
-  });
+  console.log("REGISTER RESULT:", result);
+
+  if (result.errors) {
+    message.textContent = "Registration failed.";
+    console.error(result.errors);
+    return;
+  }
+
+  message.textContent = "Registered successfully! You can now log in.";
+
+} catch (err) {
+  message.textContent = "Registration failed.";
+  console.error(err);
 }
 
 
