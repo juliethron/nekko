@@ -4,9 +4,16 @@ const BASE_URL = "https://v2.api.noroff.dev/social/posts";
 
 
 export async function getPosts() {
-  const res = await fetch(BASE_URL);
-  const data = await res.json();
-  return data;
+  const token = localStorage.getItem("token");
+
+  const res = await fetch("https://v2.api.noroff.dev/social/posts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": "YOUR_API_KEY"
+    }
+  });
+
+  return await res.json();
 }
 
 
