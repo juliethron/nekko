@@ -60,7 +60,7 @@ function initRegister() {
 
       if (result.errors) {
         message.textContent = "Registration failed.";
-        console.error(result.errors);
+        console.error(result.errors[0].message);
         return;
       }
 
