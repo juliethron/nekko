@@ -15,13 +15,16 @@ export async function register(userData) {
 
 
 export async function login(credentials) {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
+  const res = await fetch("https://v2.api.noroff.dev/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(credentials)
   });
+
+  return await res.json();
+}
 
   const data = await res.json();
 
