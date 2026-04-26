@@ -4,9 +4,21 @@
     <meta charset="UTF-8" />
     <title>✧˖° Nekko ✧˖°</title>
 
+     <script>
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      window.location.href = "./pages/feed.html";
+    }
+  </script>
+
+  <link rel="stylesheet" href="./styles/styles.css" />
+</head>
+
+  <body>
    <div class="hero">
   <h1>⊹ ࣪ ˖ Nekko ⊹ ࣪ ˖</h1>
-  <img src="../assets/cat.gif" alt="Cute cat" class="hero-gif" />
+  <img src="../assets/cat.webp" alt="Cute cat" class="hero-gif" />
 
   <div class="hero-buttons">
     <a href="./login.html"><button>Login</button></a>
@@ -16,5 +28,5 @@
 
    
   </head>
-  <body></body>
+  </body>
 </html>
