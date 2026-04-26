@@ -215,3 +215,58 @@ button {
 width: 100%;
 }
 }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+}
+
+.topbar h1 {
+  margin: 0;
+  color: var(--pink-dark);
+}
+
+.topbar button {
+  background: var(--lavender);
+}
+
+.feed-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#search {
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+}
+
+#feed {
+  display: grid;
+  gap: 1rem;
+}
+
+.post {
+  background: white;
+  border-radius: 16px;
+  padding: 1rem;
+  border-left: 6px solid var(--pink);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease;
+}
+
+.post:hover {
+  transform: translateY(-2px);
+}
+
+.post h3 {
+  margin: 0 0 0.4rem;
+  color: var(--pink-dark);
+}
+
+.post p {
+  margin: 0;
+}
