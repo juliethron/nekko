@@ -75,6 +75,10 @@ renderPosts(filtered);
     const password = document.getElementById("login-password").value;
     const message = document.getElementById("login-message");
 
+    console.log("LOGIN INPUT:", { email, password }); 
+
+  const message = document.getElementById("login-message");
+
     try {
       const data = await login({ email, password });
 
