@@ -9,7 +9,7 @@ export async function getPosts() {
   const res = await fetch("https://v2.api.noroff.dev/social/posts", {
     headers: {
       Authorization: `Bearer ${token}`,
-      "X-Noroff-API-Key": "YOUR_API_KEY"
+      "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
     }
   });
 
