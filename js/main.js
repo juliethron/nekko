@@ -33,28 +33,35 @@ renderPosts(filtered);
 }
 
 
-  function initRegister() {
+ function initRegister() {
   const registerBtn = document.getElementById("register-btn");
 
-if (!registerBtn) return;
+  if (!registerBtn) return;
 
-registerBtn.addEventListener("click", async () => {
-const name = document.getElementById("register-name").value;
-const email = document.getElementById("register-email").value;
-const password = document.getElementById("register-password").value;
-const message = document.getElementById("register-message");
+  registerBtn.addEventListener("click", async () => {
+    const nameInput = document.getElementById("register-name");
+    const emailInput = document.getElementById("register-email");
+    const passwordInput = document.getElementById("register-password");
+    const message = document.getElementById("register-message");
 
-try {
-  await register({ name, email, password });
+    if (!nameInput || !emailInput || !passwordInput) {
+      console.error("Missing input fields");
+      return;
+    }
 
-  message.textContent = "Registered successfully! You can now log in.";
-} catch (err) {
-  message.textContent = "Registration failed.";
-  console.error(err);
-}
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
+    try {
+      await register({ name, email, password });
 
-});
+      message.textContent = "Registered successfully! You can now log in.";
+    } catch (err) {
+      message.textContent = "Registration failed.";
+      console.error(err);
+    }
+  });
 }
 
 
