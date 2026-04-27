@@ -16,7 +16,7 @@ const nameEl = document.getElementById("profile-name");
 const avatarEl = document.getElementById("profile-avatar");
 const bioEl = document.getElementById("profile-bio");
 const postsContainer = document.getElementById("profile-posts");
-const followBtn = document.getElementById("follow-btn"); // 👈 NEW
+const followBtn = document.getElementById("follow-btn"); 
 
 async function loadProfile() {
   try {
