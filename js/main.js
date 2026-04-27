@@ -183,5 +183,5 @@ location.reload();
   initSearch();
   initRegister();
   initLogin();
-  initCreatePost();
-  });
+  initCreatePost(); 
+});
