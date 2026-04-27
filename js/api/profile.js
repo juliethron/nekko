@@ -1,3 +1,5 @@
+import { followUser, unfollowUser } from "./api/profiles.js";
+
 const token = localStorage.getItem("token");
 const params = new URLSearchParams(window.location.search);
 const profileName = params.get("name");
@@ -14,11 +16,12 @@ const nameEl = document.getElementById("profile-name");
 const avatarEl = document.getElementById("profile-avatar");
 const bioEl = document.getElementById("profile-bio");
 const postsContainer = document.getElementById("profile-posts");
+const followBtn = document.getElementById("follow-btn"); // 👈 NEW
 
 async function loadProfile() {
   try {
     const res = await fetch(
-      `https://v2.api.noroff.dev/social/profiles/${nameToLoad}?_posts=true`,
+      `https://v2.api.noroff.dev/social/profiles/${nameToLoad}?_posts=true&_followers=true`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -41,12 +44,37 @@ async function loadProfile() {
     bioEl.textContent = profile.bio || "今日はかなり怖かったけど、どうでもいい ✧";
 
     const avatarUrl = profile.avatar?.url;
-
     if (!avatarUrl || avatarUrl.includes("dicebear")) {
       avatarEl.src = "../assets/pfp.jpg";
     } else {
       avatarEl.src = avatarUrl;
     }
+
+    
+    if (profile.name === user.name) {
+      followBtn.style.display = "none";
+    } else {
+      const isFollowing = profile.followers?.some(
+        follower => follower.name === user.name
+      );
+
+      followBtn.textContent = isFollowing ? "Unfollow" : "Follow";
+
+      followBtn.onclick = async () => {
+        try {
+          if (followBtn.textContent === "Follow") {
+            await followUser(profile.name);
+            followBtn.textContent = "Unfollow";
+          } else {
+            await unfollowUser(profile.name);
+            followBtn.textContent = "Follow";
+          }
+        } catch (err) {
+          console.error("Follow error:", err);
+        }
+      };
+    }
+
 
     postsContainer.innerHTML = "";
 
