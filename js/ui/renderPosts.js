@@ -15,7 +15,12 @@ export function renderPosts(posts) {
           ${post.title || "No title"}
         </a>
       </h3>
-      <p>${post.body || ""}</p>
+      <p>
+  <a href="/nekko/pages/profile.html?name=${post.author?.name}">
+    ${post.author?.name || "Unknown"}
+  </a>
+</p>
+<p>${post.body || ""}</p>
 
       <div class="post-actions">
         <button onclick="deletePost('${post.id}')">Delete</button>
