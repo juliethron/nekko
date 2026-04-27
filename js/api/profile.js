@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
 
 if (!token || !user) {
-  window.location.href = "../login.html";
+  window.location.href = "/nekko/pages/login.html";
 }
 
 const nameEl = document.getElementById("profile-name");
