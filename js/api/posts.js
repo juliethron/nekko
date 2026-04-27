@@ -18,7 +18,7 @@ export async function createPost(postData) {
 }
 
 
-eexport async function getPosts() {
+export async function getPosts() {
   const token = localStorage.getItem("token");
 
   const res = await fetch(
