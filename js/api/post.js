@@ -7,11 +7,18 @@ if (!token) {
 const params = new URLSearchParams(window.location.search);
 const postId = params.get("id");
 
+console.log("POST ID:", postId);
+
 const titleEl = document.getElementById("post-title");
 const bodyEl = document.getElementById("post-body");
 const authorEl = document.getElementById("post-author");
 
 async function loadPost() {
+  if (!postId) {
+    titleEl.textContent = "No post ID found";
+    return;
+  }
+
   try {
     const res = await fetch(
       `https://v2.api.noroff.dev/social/posts/${postId}?_author=true`,
@@ -23,10 +30,15 @@ async function loadPost() {
       }
     );
 
-    const data = await res.json();
+    console.log("STATUS:", res.status);
 
-    if (!data.data) {
+    const data = await res.json();
+    console.log("POST DATA:", data);
+
+    if (!res.ok || !data.data) {
       titleEl.textContent = "Post not found";
+      bodyEl.textContent = "";
+      authorEl.textContent = "";
       return;
     }
 
@@ -34,10 +46,11 @@ async function loadPost() {
 
     titleEl.textContent = post.title || "No title";
     bodyEl.textContent = post.body || "";
-    authorEl.textContent = "By " + post.author?.name;
+    authorEl.textContent = "By " + (post.author?.name || "Unknown");
 
   } catch (err) {
     console.error("Post error:", err);
+    titleEl.textContent = "Error loading post";
   }
 }
 
