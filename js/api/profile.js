@@ -16,7 +16,9 @@ const nameEl = document.getElementById("profile-name");
 const avatarEl = document.getElementById("profile-avatar");
 const bioEl = document.getElementById("profile-bio");
 const postsContainer = document.getElementById("profile-posts");
-const followBtn = document.getElementById("follow-btn"); 
+const followBtn = document.getElementById("follow-btn");
+
+console.log("FOLLOW BTN:", followBtn); 
 
 async function loadProfile() {
   try {
@@ -30,6 +32,8 @@ async function loadProfile() {
       }
     );
 
+    console.log("STATUS:", res.status); /
+
     const data = await res.json();
     console.log("PROFILE DATA:", data);
 
@@ -40,20 +44,29 @@ async function loadProfile() {
 
     const profile = data.data;
 
+    
     nameEl.textContent = profile.name;
-    bioEl.textContent = profile.bio || "今日はかなり怖かったけど、どうでもいい ✧";
+    bioEl.textContent = profile.bio || "No bio yet ✧";
 
+    
     const avatarUrl = profile.avatar?.url;
-    if (!avatarUrl || avatarUrl.includes("dicebear")) {
-      avatarEl.src = "../assets/pfp.jpg";
-    } else {
-      avatarEl.src = avatarUrl;
+    avatarEl.src =
+      avatarUrl && !avatarUrl.includes("dicebear")
+        ? avatarUrl
+        : "../assets/pfp.jpg";
+
+   
+    if (!followBtn) {
+      console.error("Follow button not found");
+      return;
     }
 
     
     if (profile.name === user.name) {
       followBtn.style.display = "none";
     } else {
+      followBtn.style.display = "block";
+
       const isFollowing = profile.followers?.some(
         follower => follower.name === user.name
       );
@@ -61,6 +74,8 @@ async function loadProfile() {
       followBtn.textContent = isFollowing ? "Unfollow" : "Follow";
 
       followBtn.onclick = async () => {
+        console.log("CLICKED FOLLOW"); 
+
         try {
           if (followBtn.textContent === "Follow") {
             await followUser(profile.name);
@@ -74,7 +89,6 @@ async function loadProfile() {
         }
       };
     }
-
 
     postsContainer.innerHTML = "";
 
