@@ -106,31 +106,40 @@ try {
 }
 
 
-  function initCreatePost() {
+function initCreatePost() {
   const btn = document.getElementById("create-post-btn");
   if (!btn) return;
 
-btn.addEventListener("click", async () => {
-const content = document.getElementById("post-content")?.value;
-const token = localStorage.getItem("token");
+  btn.addEventListener("click", async () => {
+    const content = document.getElementById("post-content")?.value;
+    const token = localStorage.getItem("token");
 
+    if (!content) return;
 
-if (!content) return;
+    const res = await fetch("https://v2.api.noroff.dev/social/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
+      },
+      body: JSON.stringify({ body: content })
+    });
 
-await fetch("https://v2.api.noroff.dev/social/posts", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-    "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
-  },
-  body: JSON.stringify({ body: content })
-});
+    const data = await res.json();
+    console.log("NEW POST:", data);
 
-location.reload();
+    if (!data.data) {
+      console.error("Post failed", data);
+      return;
+    }
 
+    const newPost = data.data;
+    allPosts.unshift(newPost);
+    renderPosts(allPosts);
 
-});
+    document.getElementById("post-content").value = "";
+  });
 }
 
 
