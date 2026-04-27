@@ -33,13 +33,16 @@ async function loadProfile() {
 
     const profile = data.data;
 
-    // 👤 Profile info
     nameEl.textContent = profile.name;
     bioEl.textContent = profile.bio || "No bio yet ✧";
 
-    avatarEl.src =
-      profile.avatar?.url ||
-      "https://via.placeholder.com/100";
+    const avatarUrl = profile.avatar?.url;
+
+if (!avatarUrl || avatarUrl.includes("placeholder")) {
+  avatarEl.src = "https://i.imgur.com/6VBx3io.png";
+} else {
+  avatarEl.src = avatarUrl;
+}
 
     postsContainer.innerHTML = "";
 
