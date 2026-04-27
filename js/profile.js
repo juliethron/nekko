@@ -32,7 +32,7 @@ async function loadProfile() {
       }
     );
 
-    console.log("STATUS:", res.status); /
+    console.log("STATUS:", res.status); 
 
     const data = await res.json();
     console.log("PROFILE DATA:", data);
