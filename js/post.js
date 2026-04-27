@@ -11,7 +11,6 @@ if (!token) {
   window.location.href = "/nekko/pages/login.html";
 }
 
-const params = new URLSearchParams(window.location.search);
 const postId = params.get("id");
 
 console.log("POST ID:", postId);
