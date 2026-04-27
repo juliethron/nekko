@@ -10,23 +10,25 @@ export function renderPosts(posts) {
     div.classList.add("post");
 
     div.innerHTML = `
-      <h3>
-        <a href="/nekko/pages/post.html?id=${post.id}">
-          ${post.title || "No title"}
-        </a>
-      </h3>
-      <p>
-  <a href="/nekko/pages/profile.html?name=${post.author?.name}">
-    ${post.author?.name || "Unknown"}
-  </a>
-</p>
-<p>${post.body || ""}</p>
+  <h3 class="post-title">
+    <a href="/nekko/pages/post.html?id=${post.id}">
+      ${post.title || "No title"}
+    </a>
+  </h3>
 
-      <div class="post-actions">
-        <button onclick="deletePost('${post.id}')">Delete</button>
-        <button onclick="editPost('${post.id}')">Edit</button>
-      </div>
-    `;
+  <p class="post-author">
+    <a href="/nekko/pages/profile.html?name=${post.author?.name}">
+      ${post.author?.name || "Unknown"}
+    </a>
+  </p>
+
+  <p class="post-body">${post.body || ""}</p>
+
+  <div class="post-actions">
+    <button onclick="deletePost('${post.id}')">Delete</button>
+    <button onclick="editPost('${post.id}')">Edit</button>
+  </div>
+`;
 
     container.appendChild(div);
   });
