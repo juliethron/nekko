@@ -145,15 +145,32 @@ try {
 }
 
 window.deletePost = async (id) => {
-const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-await fetch(`https://v2.api.noroff.dev/social/posts/${id}`, {
-method: "DELETE",
-headers: {
-Authorization: `Bearer ${token}`,
-"X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
-}
-});
+  try {
+    const res = await fetch(`https://v2.api.noroff.dev/social/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
+      }
+    });
+
+    console.log("DELETE STATUS:", res.status);
+
+    if (!res.ok) {
+      const error = await res.json();
+      console.error("Delete failed:", error);
+      return;
+    }
+
+    allPosts = allPosts.filter(post => post.id !== id);
+    renderPosts(allPosts);
+
+  } catch (err) {
+    console.error("Delete error:", err);
+  }
+};
 
 location.reload();
 };
