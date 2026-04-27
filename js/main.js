@@ -172,8 +172,6 @@ window.deletePost = async (id) => {
   }
 };
 
-location.reload();
-};
 
 window.editPost = async (id) => {
   const newText = prompt("Edit your post:");
@@ -213,8 +211,6 @@ window.editPost = async (id) => {
   }
 };
 
-location.reload();
-};
 
 document.addEventListener("DOMContentLoaded", () => {
 initFeed();
