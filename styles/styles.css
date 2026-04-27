@@ -314,3 +314,15 @@ width: 100%;
   border: 3px solid #f3a6c9;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+
+.auth-links {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.auth-links a {
+  color: var(--pink-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
