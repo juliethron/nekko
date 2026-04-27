@@ -115,14 +115,17 @@ if (!content) return;
 
 try {
   const res = await fetch("https://v2.api.noroff.dev/social/posts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-      "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
-    },
-    body: JSON.stringify({ body: content })
-  });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
+  },
+  body: JSON.stringify({ 
+    title: "My post",   
+    body: content 
+  })
+});
 
   const data = await res.json();
   console.log("NEW POST:", data);
