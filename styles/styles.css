@@ -270,3 +270,38 @@ width: 100%;
 .post p {
   margin: 0;
 }
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  padding: 0.8rem 1rem;
+  background: white;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--pink-dark);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.nav button {
+  background: var(--lavender);
+}
