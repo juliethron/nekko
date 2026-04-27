@@ -4,12 +4,11 @@ const profileName = params.get("name");
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-const nameToLoad = profileName || user.name;
-
-
 if (!token || !user) {
   window.location.href = "/nekko/pages/login.html";
 }
+
+const nameToLoad = profileName || user.name;
 
 const nameEl = document.getElementById("profile-name");
 const avatarEl = document.getElementById("profile-avatar");
@@ -29,7 +28,6 @@ async function loadProfile() {
     );
 
     const data = await res.json();
-
     console.log("PROFILE DATA:", data);
 
     if (!data.data) {
@@ -40,19 +38,20 @@ async function loadProfile() {
     const profile = data.data;
 
     nameEl.textContent = profile.name;
-  bioEl.textContent = profile.bio || "今日はかなり怖かったけど、どうでもいい ✧";
+    bioEl.textContent = profile.bio || "今日はかなり怖かったけど、どうでもいい ✧";
 
-
-  avatarEl.src = "../assets/pfp.jpg?v=" + new Date().getTime();
-
-    
-if (!avatarUrl || avatarUrl.includes("placeholder")) {
-  avatarEl.src = "../assets/pfp.jpg";
-} else {
-  avatarEl.src = avatarUrl;
-}
+    const avatarUrl = profile.avatar?.url;
+    avatarEl.src =
+      avatarUrl && avatarUrl.trim() !== ""
+        ? avatarUrl
+        : "../assets/pfp.jpg";
 
     postsContainer.innerHTML = "";
+
+    if (!profile.posts || profile.posts.length === 0) {
+      postsContainer.innerHTML = "<p>No posts yet ✧</p>";
+      return;
+    }
 
     profile.posts.forEach(post => {
       const div = document.createElement("div");
@@ -68,6 +67,7 @@ if (!avatarUrl || avatarUrl.includes("placeholder")) {
 
   } catch (err) {
     console.error("Profile error:", err);
+    nameEl.textContent = "Error loading profile";
   }
 }
 
