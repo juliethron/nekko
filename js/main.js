@@ -214,6 +214,15 @@ window.editPost = async (id) => {
   }
 };
 
+function initLogout() {
+  const btn = document.getElementById("logout-btn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    localStorage.clear();
+    window.location.href = "../index.html";
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 initFeed();
@@ -221,4 +230,5 @@ initSearch();
 initRegister();
 initLogin();
 initCreatePost();
+initLogout();
 });
