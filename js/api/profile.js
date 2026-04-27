@@ -13,7 +13,7 @@ const postsContainer = document.getElementById("profile-posts");
 async function loadProfile() {
   try {
     const res = await fetch(
-      `https://v2.api.noroff.dev/social/profiles/${user.name}?_posts=true`,
+      `https://v2.api.noroff.dev/social/profiles/${nameToLoad}?_posts=true`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
