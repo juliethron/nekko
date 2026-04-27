@@ -307,9 +307,10 @@ width: 100%;
 }
 
 #profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
-  border: 3px solid #f3c6e0;
+  border-radius: 50%;
+  border: 3px solid #f3a6c9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
