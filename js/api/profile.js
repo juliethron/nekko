@@ -1,5 +1,11 @@
 const token = localStorage.getItem("token");
+const params = new URLSearchParams(window.location.search);
+const profileName = params.get("name");
+
 const user = JSON.parse(localStorage.getItem("user"));
+
+const nameToLoad = profileName || user.name;
+
 
 if (!token || !user) {
   window.location.href = "/nekko/pages/login.html";
