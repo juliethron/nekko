@@ -41,10 +41,12 @@ async function loadProfile() {
     bioEl.textContent = profile.bio || "今日はかなり怖かったけど、どうでもいい ✧";
 
     const avatarUrl = profile.avatar?.url;
-    avatarEl.src =
-      avatarUrl && avatarUrl.trim() !== ""
-        ? avatarUrl
-        : "../assets/pfp.jpg";
+
+    if (!avatarUrl || avatarUrl.includes("dicebear")) {
+      avatarEl.src = "../assets/pfp.jpg";
+    } else {
+      avatarEl.src = avatarUrl;
+    }
 
     postsContainer.innerHTML = "";
 
