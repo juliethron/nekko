@@ -5,10 +5,9 @@ import { filterPosts } from "./utils/filter.js";
 
 let allPosts = [];
 
-
-  async function initFeed() {
-  const feed = document.getElementById("feed");
-  if (!feed) return;
+async function initFeed() {
+const feed = document.getElementById("feed");
+if (!feed) return;
 
 try {
 const res = await getPosts();
@@ -28,10 +27,9 @@ console.error("Failed to load posts", err);
 }
 }
 
-
-  function initSearch() {
-  const searchInput = document.getElementById("search");
-  if (!searchInput) return;
+function initSearch() {
+const searchInput = document.getElementById("search");
+if (!searchInput) return;
 
 searchInput.addEventListener("input", (e) => {
 const filtered = filterPosts(allPosts, e.target.value);
@@ -39,10 +37,9 @@ renderPosts(filtered);
 });
 }
 
-
-  function initRegister() {
-  const registerBtn = document.getElementById("register-btn");
-  if (!registerBtn) return;
+function initRegister() {
+const registerBtn = document.getElementById("register-btn");
+if (!registerBtn) return;
 
 registerBtn.addEventListener("click", async () => {
 const name = document.getElementById("register-name")?.value;
@@ -53,8 +50,6 @@ const message = document.getElementById("register-message");
 
 try {
   const result = await register({ name, email, password });
-
-  console.log("REGISTER RESULT:", result);
 
   if (result.errors) {
     message.textContent = result.errors[0].message;
@@ -71,18 +66,15 @@ try {
 });
 }
 
-
-  function initLogin() {
-  const loginBtn = document.getElementById("login-btn");
-  if (!loginBtn) return;
+function initLogin() {
+const loginBtn = document.getElementById("login-btn");
+if (!loginBtn) return;
 
 loginBtn.addEventListener("click", async () => {
 const email = document.getElementById("login-email")?.value;
 const password = document.getElementById("login-password")?.value;
 const message = document.getElementById("login-message");
 
-
-console.log("LOGIN INPUT:", { email, password });
 
 try {
   const data = await login({ email, password });
@@ -91,13 +83,12 @@ try {
     throw new Error("Invalid login");
   }
 
-
   localStorage.setItem("token", data.data.accessToken);
   localStorage.setItem("user", JSON.stringify(data.data));
 
   window.location.href = "./feed.html";
 } catch (err) {
-  message.textContent = "Login failed. Check your email/password.";
+  message.textContent = "Login failed.";
   console.error(err);
 }
 
@@ -105,46 +96,56 @@ try {
 });
 }
 
-
 function initCreatePost() {
-  const btn = document.getElementById("create-post-btn");
-  if (!btn) return;
+const btn = document.getElementById("create-post-btn");
+const textarea = document.getElementById("post-content");
 
-  btn.addEventListener("click", async () => {
-    const content = document.getElementById("post-content")?.value;
-    const token = localStorage.getItem("token");
+console.log("Create button:", btn); 
 
-    if (!content) return;
+if (!btn || !textarea) return;
 
-    const res = await fetch("https://v2.api.noroff.dev/social/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
-      },
-      body: JSON.stringify({ body: content })
-    });
+btn.addEventListener("click", async () => {
+console.log("POST CLICKED"); 
 
-    const data = await res.json();
-    console.log("NEW POST:", data);
 
-    if (!data.data) {
-      console.error("Post failed", data);
-      return;
-    }
+const content = textarea.value.trim();
+const token = localStorage.getItem("token");
 
-    const newPost = data.data;
-    allPosts.unshift(newPost);
-    renderPosts(allPosts);
+if (!content) return;
 
-    document.getElementById("post-content").value = "";
+try {
+  const res = await fetch("https://v2.api.noroff.dev/social/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": "134d87df-3d4c-4578-b111-c34a8e816707"
+    },
+    body: JSON.stringify({ body: content })
   });
+
+  const data = await res.json();
+  console.log("NEW POST:", data);
+
+  if (!data.data) {
+    console.error("Post failed", data);
+    return;
+  }
+
+  allPosts.unshift(data.data);
+  renderPosts(allPosts);
+
+  textarea.value = "";
+} catch (err) {
+  console.error("Create post failed", err);
 }
 
 
-  window.deletePost = async (id) => {
-  const token = localStorage.getItem("token");
+});
+}
+
+window.deletePost = async (id) => {
+const token = localStorage.getItem("token");
 
 await fetch(`https://v2.api.noroff.dev/social/posts/${id}`, {
 method: "DELETE",
@@ -157,10 +158,9 @@ Authorization: `Bearer ${token}`,
 location.reload();
 };
 
-
-  window.editPost = async (id) => {
-  const newText = prompt("Edit your post:");
-  if (!newText) return;
+window.editPost = async (id) => {
+const newText = prompt("Edit your post:");
+if (!newText) return;
 
 const token = localStorage.getItem("token");
 
@@ -177,11 +177,10 @@ body: JSON.stringify({ body: newText })
 location.reload();
 };
 
-
-  document.addEventListener("DOMContentLoaded", () => {
-  initFeed();
-  initSearch();
-  initRegister();
-  initLogin();
-  initCreatePost(); 
+document.addEventListener("DOMContentLoaded", () => {
+initFeed();
+initSearch();
+initRegister();
+initLogin();
+initCreatePost();
 });
