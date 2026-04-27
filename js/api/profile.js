@@ -1,4 +1,4 @@
-import { followUser, unfollowUser } from "../js/api/profiles.js";
+import { followUser, unfollowUser } from "/nekko/js/api/profiles.js";
 
 const token = localStorage.getItem("token");
 const params = new URLSearchParams(window.location.search);
