@@ -34,10 +34,12 @@ async function loadProfile() {
     const profile = data.data;
 
     nameEl.textContent = profile.name;
-    bioEl.textContent = profile.bio || "No bio yet ✧";
+  bioEl.textContent = profile.bio || "今日はかなり怖かったけど、どうでもいい ✧";
 
-    const avatarUrl = profile.avatar?.url;
 
+  avatarEl.src = "../assets/pfp.jpg?v=" + new Date().getTime();
+
+    
 if (!avatarUrl || avatarUrl.includes("placeholder")) {
   avatarEl.src = "../assets/pfp.jpg";
 } else {
