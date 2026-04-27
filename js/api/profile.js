@@ -39,7 +39,7 @@ async function loadProfile() {
     const avatarUrl = profile.avatar?.url;
 
 if (!avatarUrl || avatarUrl.includes("placeholder")) {
-  avatarEl.src = "https://i.imgur.com/6VBx3io.png";
+  avatarEl.src = "../assets/pfp.jpg";
 } else {
   avatarEl.src = avatarUrl;
 }
