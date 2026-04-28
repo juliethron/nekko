@@ -239,6 +239,7 @@ border: 1px solid #f3b6c7;
 .post-actions {
   display: flex;
   gap: 0.75rem;
+  justify-content: flex-end;
   margin-top: 0.75rem;
 }
 
