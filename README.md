@@ -1,15 +1,23 @@
-# Social Media App
+# Nekko Social App
 
-## Setup
-1. Clone repo
-2. Open with Live Server
+## Description
+A cute/kawaii inspired social media app built with JavaScript using the Noroff API.
 
 ## Features
-- Register / Login
-- Create posts
-- Edit/Delete posts
-- Follow users
+- Register & login
+- Create, edit, delete posts
+- View feed
+- View profiles
+- Follow/unfollow users
+- Search posts
 
-## Tech
+## How to run
+1. Clone repo
+2. Open index.html or deploy link
+
+## Tech stack
 - JavaScript (ES6 modules)
 - Noroff API
+
+## Deployment
+https://juliethron.github.io/nekko/
