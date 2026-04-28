@@ -50,7 +50,7 @@ async function loadProfile() {
 
     
     const avatarUrl = profile.avatar?.url;
-    avatarEl.src =
+    avatarEl.src = "../assets/pfp.jpg";
       avatarUrl && !avatarUrl.includes("dicebear")
         ? avatarUrl
         : "../assets/pfp.jpg";
