@@ -3,6 +3,11 @@ import { getToken } from "../utils/storage.js";
 const BASE_URL = "https://v2.api.noroff.dev/social/posts";
 
 
+/**
+ * Creates a new post
+ * @param {Object} postData - The content of the post
+ * @returns {Promise<Object>} Created post data
+ */
 export async function createPost(postData) {
   const res = await fetch(BASE_URL, {
     method: "POST",
@@ -17,7 +22,10 @@ export async function createPost(postData) {
   return await res.json();
 }
 
-
+/**
+ * Fetches all posts from the API
+ * @returns {Promise<Object>} Response containing posts
+ */
 export async function getPosts() {
   const token = localStorage.getItem("token");
 
@@ -34,6 +42,10 @@ export async function getPosts() {
   return await res.json();
 }
 
+/**
+ * Deletes a post by ID
+ * @param {string} id - The ID of the post to delete
+ */
 export async function deletePost(id) {
   await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
