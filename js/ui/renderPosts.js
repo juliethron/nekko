@@ -9,18 +9,20 @@ export function renderPosts(posts) {
     const div = document.createElement("div");
     div.classList.add("post");
 
-    div.innerHTML = `
-  <h3 class="post-title">
-    <a href="/nekko/pages/post.html?id=${post.id}">
-      ${post.title || "No title"}
-    </a>
-  </h3>
+  div.innerHTML = `
+  <div class="post-header">
+    <h3 class="post-title">
+      <a href="/nekko/pages/post.html?id=${post.id}">
+        ${post.title || "No title"}
+      </a>
+    </h3>
 
-  <p class="post-author">
-    <a href="/nekko/pages/profile.html?name=${post.author?.name}">
-      ${post.author?.name || "Unknown"}
-    </a>
-  </p>
+    <p class="post-author">
+      <a href="/nekko/pages/profile.html?name=${post.author?.name}">
+        ${post.author?.name || "Unknown"}
+      </a>
+    </p>
+  </div>
 
   <p class="post-body">${post.body || ""}</p>
 
