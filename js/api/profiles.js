@@ -3,6 +3,10 @@ import { getToken } from "../utils/storage.js";
 const BASE_URL = "https://v2.api.noroff.dev";
 const API_KEY = "134d87df-3d4c-4578-b111-c34a8e816707";
 
+/**
+ * Follows a user by name
+ * @param {string} name -Username to follow
+ */
 export async function followUser(name) {
   const res = await fetch(`${BASE_URL}/social/profiles/${name}/follow`, {
     method: "PUT",
@@ -23,6 +27,10 @@ export async function followUser(name) {
   return await res.json();
 }
 
+/**
+ * Unfollows a user by name
+ * @param {string} name -Username to unfollow
+ */
 export async function unfollowUser(name) {
   const res = await fetch(`${BASE_URL}/social/profiles/${name}/unfollow`, {
     method: "PUT",
