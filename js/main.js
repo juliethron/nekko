@@ -219,8 +219,9 @@ function initLogout() {
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    localStorage.clear();
-    window.location.href = "../index.html";
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/nekko/pages/login.html";
   });
 }
 
